@@ -386,6 +386,15 @@ class MenuState extends Phaser.State {
   update() {}
 
   onclickStartBtn(){
+    //webaudioのタッチ制約対応
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.frequency.value = 440;
+    gain.gain.value = 0;
+    osc.start(0);
+    osc.stop(0);
 
     var sendIntervals = [];
     for(var i = 0; i < this.itvBtns.length; i++){
